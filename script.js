@@ -162,7 +162,7 @@ const displayResults = () => {
     'You got ' + numOfCorrAnswers + ' out of ' + questions.length;
 
   containerOfResults.style.color =
-    numOfCorrAnswers > questions.length * 0.7
+    numOfCorrAnswers > questions.length * 0.75
       ? 'green'
       : numOfCorrAnswers > questions.length * 0.5
       ? 'orange'

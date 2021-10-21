@@ -5,7 +5,7 @@
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 60%;
   box-sizing: border-box;
 }
 
@@ -15,16 +15,16 @@ body {
   background-color: rgb(14, 49, 26);
 }
 
-/* LAYOUT */
 header {
   position: relative;
   height: 35vh;
   border-bottom: 7px solid #eee;
+  size: 1px;
 }
 
 main {
   height: 65vh;
-  color: #eee;
+  color: rgb(240, 233, 233);
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -42,7 +42,6 @@ main {
   font-size: 2rem;
 }
 
-/* ELEMENTS STYLE */
 h1 {
   font-size: 6rem;
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
@@ -54,8 +53,8 @@ h1 {
   transform: translate(-50%, -50%);
 }
 
-.between {
-  font-size: 1.4rem;
+.info {
+  font-size: 1.8rem;
   position: absolute;
   top: 2rem;
   right: 2rem;
@@ -83,8 +82,8 @@ h1 {
 
 .start {
   position: absolute;
-  top: 45rem;
-  left: 40%;
+  top: 30rem;
+  left: 42%;
   font-size: 4rem;
 }
 
