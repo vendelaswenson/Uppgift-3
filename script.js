@@ -100,29 +100,47 @@ const startBtn = document.querySelector('.start');
 const checkBtn = document.querySelector('.check');
 let container = document.querySelector('#quiz');
 let containerOfResults = document.querySelector('#results');
+const nextBtn = document.createElement('button');
+
+let numOfCorrAnswers = 0;
+let highscore = 0;
 
 const displayQuiz = () => {
-  const showQuestions = () => {
-    var output = [];
-    var options;
+  const displayQuestions = () => {
+    let output = [];
 
     for (let i = 0; i < questions.length; i++) {
-      options = [];
+      let options = [];
 
-      for (let letter in questions[i].options) {
+      // if (questions.correctAnswer.length > 1) {
+      //   options.push(
+      //     '<label>' +
+      //       '<input type="checkbox" name="question' +
+      //       i +
+      //       '" value="' +
+      //       option +
+      //       '">' +
+      //       option +
+      //       ': ' +
+      //       questions[i].options[option] +
+      //       '</label>'
+      //   );
+      // } else {
+      for (let option in questions[i].options) {
         options.push(
           '<label>' +
             '<input type="radio" name="question' +
             i +
             '" value="' +
-            letter +
+            option +
             '">' +
-            letter +
+            option +
             ': ' +
-            questions[i].options[letter] +
+            questions[i].options[option] +
             '</label>'
         );
       }
+      //}
 
       output.push(
         '<div class="question">' +
@@ -133,40 +151,65 @@ const displayQuiz = () => {
           '</div>'
       );
     }
-
     container.innerHTML = output.join('');
-  };
 
-  showQuestions(questions, container);
+    // container.innerHTML.style.color =
+    //   numOfCorrAnswers > questions.length * 0.5
+    //     ? 'orange'
+    //     : numOfCorrAnswers > questions.length * 0.7
+    //     ? 'green'
+    //     : 'black';
+  };
+  displayQuestions(questions, container);
 };
 
 const displayResults = () => {
   let containerOfAnswers = container.querySelectorAll('.answer');
-  let userAnswer = '';
-  let numCorrect = 0;
 
   for (let i = 0; i < questions.length; i++) {
-    userAnswer = (
+    let userAnswer = (
       containerOfAnswers[i].querySelector(
         'input[name=question' + i + ']:checked'
       ) || {}
     ).value;
 
     if (userAnswer === questions[i].correctAnswer) {
-      numCorrect++;
+      numOfCorrAnswers++;
       containerOfAnswers[i].style.color = 'lightgreen';
     } else {
       containerOfAnswers[i].style.color = 'red';
     }
   }
-  containerOfResults.innerHTML = numCorrect + ' out of ' + questions.length;
+
+  containerOfResults.innerHTML =
+    'You got ' + numOfCorrAnswers + ' out of ' + questions.length;
+  //Hur färga meddelandet?
 };
 
-checkBtn.addEventListener('click', () => {
+checkBtn.addEventListener('click', e => {
+  e.preventDefault();
   displayResults(questions, container, containerOfResults);
+
+  if (numOfCorrAnswers > highscore) {
+    highscore = numOfCorrAnswers;
+    document.querySelector('.highscore').textContent = highscore + '/ 10';
+  }
 });
 
-startBtn.addEventListener('click', () => {
-  startBtn.parentNode.removeChild(startBtn);
+startBtn.addEventListener('click', e => {
+  e.preventDefault();
+  startBtn.style.visibility = 'hidden';
   displayQuiz(questions, container, containerOfResults, checkBtn);
+  nextBtn.innerHTML = 'Next';
+  nextBtn.className = 'nextButton';
+  document.body.appendChild(nextBtn);
+});
+
+startOverBtn.addEventListener('click', e => {
+  e.preventDefault();
+  startBtn.style.visibility = 'visible';
+  nextBtn.style.visibility = 'hidden';
+  numOfCorrAnswers = 0;
+  container.innerHTML = '';
+  containerOfResults.innerHTML = '';
 });
