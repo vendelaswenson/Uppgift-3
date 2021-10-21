@@ -101,6 +101,12 @@ const checkBtn = document.querySelector('.check');
 let container = document.querySelector('#quiz');
 let containerOfResults = document.querySelector('#results');
 const nextBtn = document.createElement('button');
+const darkBtn = document.querySelector('.dark');
+const lightBtn = document.querySelector('.light');
+const buttons = document.querySelectorAll('.btn');
+const info = document.querySelector('.info');
+const highscoreInfo = document.querySelector('.highscore');
+const header = document.querySelector('h1');
 
 let numOfCorrAnswers = 0;
 let highscore = 0;
@@ -175,7 +181,7 @@ checkBtn.addEventListener('click', e => {
 
   if (numOfCorrAnswers > highscore) {
     highscore = numOfCorrAnswers;
-    document.querySelector('.highscore').textContent = highscore + '/ 10';
+    highscoreInfo.textContent = highscore + '/ 10';
   }
 });
 
@@ -195,4 +201,40 @@ startOverBtn.addEventListener('click', e => {
   numOfCorrAnswers = 0;
   container.innerHTML = '';
   containerOfResults.innerHTML = '';
+});
+
+darkBtn.addEventListener('click', () => {
+  document.body.style.backgroundImage =
+    "url('https://3.bp.blogspot.com/-BGNCai6-WVk/V8B6GEfwA5I/AAAAAAAAkFo/R5f8K5d2Yhs5jI1Q7zfze7zsxXTUsyoigCLcB/s1600/925.JPG')";
+  checkBtn.style.backgroundColor = 'white';
+  checkBtn.style.color = 'black';
+  startBtn.style.backgroundColor = 'white';
+  startBtn.style.color = 'black';
+  darkBtn.style.backgroundColor = 'white';
+  darkBtn.style.color = 'black';
+  lightBtn.style.backgroundColor = 'white';
+  lightBtn.style.color = 'black';
+  startOverBtn.style.backgroundColor = 'white';
+  startOverBtn.style.color = 'black';
+  info.style.color = 'white';
+  highscoreInfo.style.color = 'white';
+  header.style.color = 'white';
+});
+
+lightBtn.addEventListener('click', () => {
+  document.body.style.backgroundImage =
+    "url('http://www.stadtillstrand.se/wp-content/uploads/2021/05/visby-gotland-skymning.jpg')";
+  checkBtn.style.backgroundColor = 'rgb(59, 56, 56)';
+  checkBtn.style.color = 'white';
+  startBtn.style.backgroundColor = 'rgb(59, 56, 56)';
+  startBtn.style.color = 'white';
+  darkBtn.style.backgroundColor = 'rgb(59, 56, 56)';
+  darkBtn.style.color = 'white';
+  lightBtn.style.backgroundColor = 'rgb(59, 56, 56)';
+  lightBtn.style.color = 'white';
+  startOverBtn.style.backgroundColor = 'rgb(59, 56, 56)';
+  startOverBtn.style.color = 'white';
+  info.style.color = 'rgb(59, 56, 56)';
+  highscoreInfo.style.color = 'rgb(59, 56, 56)';
+  header.style.color = 'rgb(59, 56, 56)';
 });

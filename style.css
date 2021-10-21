@@ -23,7 +23,7 @@ header {
 
 main {
   height: 65vh;
-  color: rgb(240, 233, 233);
+  color: rgb(255, 255, 255);
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -50,6 +50,7 @@ h1 {
   top: 52%;
   left: 50%;
   transform: translate(-50%, -50%);
+  color: rgb(59, 56, 56);
 }
 
 .info {
@@ -57,7 +58,7 @@ h1 {
   position: absolute;
   top: 2rem;
   right: 2rem;
-  color: black;
+  color: rgb(59, 56, 56);
 }
 
 .again {
@@ -69,15 +70,16 @@ h1 {
 
 .btn {
   border: none;
-  background-color: rgb(20, 17, 17);
+  background-color: rgb(59, 56, 56);
   color: rgb(255, 255, 255);
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   padding: 2rem 3rem;
   cursor: pointer;
+  box-shadow: 0 8rem 10rem rgba(0, 0, 0, 0.3);
 }
 
 .btn:hover {
-  background-color: rgb(59, 56, 56);
+  background-color: rgb(83, 80, 80);
 }
 
 .start {
@@ -98,7 +100,7 @@ h1 {
   position: absolute;
   bottom: 20rem;
   right: 2rem;
-  color: rgb(20, 17, 17);
+  color: rgb(59, 56, 56);
   font-weight: 800;
 }
 
@@ -128,4 +130,16 @@ h1 {
   position: absolute;
   bottom: 4rem;
   left: 30%;
+}
+
+.dark {
+  position: absolute;
+  top: 20rem;
+  left: 2rem;
+}
+
+.light {
+  position: absolute;
+  top: 35rem;
+  left: 2rem;
 }
