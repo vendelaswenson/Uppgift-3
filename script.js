@@ -112,20 +112,6 @@ const displayQuiz = () => {
     for (let i = 0; i < questions.length; i++) {
       let options = [];
 
-      // if (questions.correctAnswer.length > 1) {
-      //   options.push(
-      //     '<label>' +
-      //       '<input type="checkbox" name="question' +
-      //       i +
-      //       '" value="' +
-      //       option +
-      //       '">' +
-      //       option +
-      //       ': ' +
-      //       questions[i].options[option] +
-      //       '</label>'
-      //   );
-      // } else {
       for (let option in questions[i].options) {
         options.push(
           '<label>' +
@@ -140,7 +126,6 @@ const displayQuiz = () => {
             '</label>'
         );
       }
-      //}
 
       output.push(
         '<div class="question">' +
@@ -152,20 +137,12 @@ const displayQuiz = () => {
       );
     }
     container.innerHTML = output.join('');
-
-    // container.innerHTML.style.color =
-    //   numOfCorrAnswers > questions.length * 0.5
-    //     ? 'orange'
-    //     : numOfCorrAnswers > questions.length * 0.7
-    //     ? 'green'
-    //     : 'black';
   };
   displayQuestions(questions, container);
 };
 
 const displayResults = () => {
   let containerOfAnswers = container.querySelectorAll('.answer');
-
   for (let i = 0; i < questions.length; i++) {
     let userAnswer = (
       containerOfAnswers[i].querySelector(
@@ -183,7 +160,13 @@ const displayResults = () => {
 
   containerOfResults.innerHTML =
     'You got ' + numOfCorrAnswers + ' out of ' + questions.length;
-  //Hur färga meddelandet?
+
+  containerOfResults.style.color =
+    numOfCorrAnswers > questions.length * 0.7
+      ? 'green'
+      : numOfCorrAnswers > questions.length * 0.5
+      ? 'orange'
+      : 'black';
 };
 
 checkBtn.addEventListener('click', e => {
