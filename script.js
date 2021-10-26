@@ -2,6 +2,7 @@
 
 const questions = [
   {
+    type: 'radio',
     question: 'Hur tar man sig enklast över till fårö?',
     options: {
       a: 'Via bron över vattnet',
@@ -11,6 +12,7 @@ const questions = [
     correctAnswer: 'c',
   },
   {
+    type: 'radio',
     question: 'Hur lång är ön?',
     options: {
       a: '170 km lång',
@@ -20,6 +22,7 @@ const questions = [
     correctAnswer: 'a',
   },
   {
+    type: 'radio',
     question:
       'Vad kallas kalkstenar som blivit formade av vind och vatten och som är vanligt på Gotland?',
     options: {
@@ -31,6 +34,7 @@ const questions = [
     correctAnswer: 'c',
   },
   {
+    type: 'radio',
     question: 'Hur många kyrkoruiner finns i Visby?',
     options: {
       a: 13,
@@ -40,6 +44,7 @@ const questions = [
     correctAnswer: 'b',
   },
   {
+    type: 'radio',
     question: 'Hur lång är Visby ringmur?',
     options: {
       a: '2,9 km lång',
@@ -49,6 +54,7 @@ const questions = [
     correctAnswer: 'c',
   },
   {
+    type: 'radio',
     question: 'Vad kallar en gotlänning sin son för?',
     options: {
       a: 'Grabben',
@@ -58,6 +64,7 @@ const questions = [
     correctAnswer: 'c',
   },
   {
+    type: 'radio',
     question: 'Hur många personer bor på Gotland?',
     options: {
       a: 58000,
@@ -67,6 +74,7 @@ const questions = [
     correctAnswer: 'a',
   },
   {
+    type: 'radio',
     question: 'När började Ringmuren byggas?',
     options: {
       a: 'På 1500-talet',
@@ -76,6 +84,7 @@ const questions = [
     correctAnswer: 'b',
   },
   {
+    type: 'checkbox',
     question: 'På vilka sätt kan man ta sig till Gotland från fastlandet?',
     options: {
       a: 'Via bron över vattnet',
@@ -85,6 +94,7 @@ const questions = [
     correctAnswer: ['b', 'c'],
   },
   {
+    type: 'radio',
     question: 'Hur brett är Gotland?',
     options: {
       a: '55 km brett',
@@ -117,20 +127,32 @@ const displayQuiz = () => {
 
     for (let i = 0; i < questions.length; i++) {
       let options = [];
-
-      for (let option in questions[i].options) {
-        options.push(
-          '<label>' +
+      if (questions[i].type === 'radio') {
+        for (let option in questions[i].options) {
+          options.push(
             '<input type="radio" name="question' +
-            i +
-            '" value="' +
-            option +
-            '">' +
-            option +
-            ': ' +
-            questions[i].options[option] +
-            '</label>'
-        );
+              i +
+              '" value="' +
+              option +
+              '">' +
+              option +
+              ': ' +
+              questions[i].options[option]
+          );
+        }
+      } else {
+        for (let option in questions[i].options) {
+          options.push(
+            '<input type="checkbox" name="question' +
+              i +
+              '" value="' +
+              option +
+              '">' +
+              option +
+              ': ' +
+              questions[i].options[option]
+          );
+        }
       }
 
       output.push(
@@ -149,18 +171,32 @@ const displayQuiz = () => {
 
 const displayResults = () => {
   let containerOfAnswers = container.querySelectorAll('.answer');
+  let userAnswersRadio = [];
+  let userAnswersCheckbox = [];
   for (let i = 0; i < questions.length; i++) {
-    let userAnswer = (
-      containerOfAnswers[i].querySelector(
-        'input[name=question' + i + ']:checked'
-      ) || {}
-    ).value;
+    userAnswersRadio =
+      containerOfAnswers[i].querySelector("input[type='radio']:checked") || {};
 
-    if (userAnswer === questions[i].correctAnswer) {
+    userAnswersCheckbox =
+      containerOfAnswers[i].querySelectorAll(
+        "input[type='checkbox']:checked"
+      ) || {};
+
+    if (userAnswersRadio.value === questions[i].correctAnswer) {
       numOfCorrAnswers++;
       containerOfAnswers[i].style.color = 'lightgreen';
     } else {
       containerOfAnswers[i].style.color = 'red';
+    }
+
+    for (let j = 0; j < userAnswersCheckbox.length; j++) {
+      if (userAnswersCheckbox[j].value === questions[i].correctAnswer[j]) {
+        numOfCorrAnswers = numOfCorrAnswers + 0.5;
+        console.log(numOfCorrAnswers);
+        containerOfAnswers[i].style.color = 'lightgreen';
+      } else {
+        containerOfAnswers[i].style.color = 'red';
+      }
     }
   }
 
