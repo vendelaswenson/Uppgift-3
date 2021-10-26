@@ -189,15 +189,16 @@ const displayResults = () => {
       containerOfAnswers[i].style.color = 'red';
     }
 
+    let corrAnswers = 0;
     for (let j = 0; j < userAnswersCheckbox.length; j++) {
       if (userAnswersCheckbox[j].value === questions[i].correctAnswer[j]) {
-        numOfCorrAnswers = numOfCorrAnswers + 0.5;
-        console.log(numOfCorrAnswers);
+        corrAnswers++;
         containerOfAnswers[i].style.color = 'green';
       } else {
         containerOfAnswers[i].style.color = 'red';
       }
     }
+    corrAnswers === 2 ? numOfCorrAnswers++ : numOfCorrAnswers;
   }
 
   containerOfResults.innerHTML =
@@ -214,6 +215,7 @@ const displayResults = () => {
 checkBtn.addEventListener('click', e => {
   e.preventDefault();
   displayResults(questions, container, containerOfResults);
+  checkBtn.style.visibility = 'hidden';
 
   if (numOfCorrAnswers > highscore) {
     highscore = numOfCorrAnswers;
@@ -239,6 +241,7 @@ startOverBtn.addEventListener('click', e => {
   containerOfResults.innerHTML = '';
   document.body.style.backgroundImage =
     "url('http://www.stadtillstrand.se/wp-content/uploads/2021/05/visby-gotland-skymning.jpg')";
+  checkBtn.style.visibility = 'visible';
 });
 
 darkBtn.addEventListener('click', () => {
