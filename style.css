@@ -106,16 +106,18 @@ h1 {
 
 #results {
   position: absolute;
-  bottom: 3rem;
-  right: 50%;
-  font-size: large;
+  bottom: 15rem;
+  right: 90rem;
+  font-size: 300%;
 }
 
 .question {
   position: relative;
   font-size: 2rem;
-  left: 20%;
+  left: 30%;
   line-height: 2;
+  color: black;
+  bottom: 22rem;
 }
 
 .answer {
@@ -123,7 +125,8 @@ h1 {
   color: black;
   justify-content: space-between;
   position: relative;
-  left: 20%;
+  left: 30%;
+  bottom: 22rem;
 }
 
 .nextButton {

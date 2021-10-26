@@ -110,7 +110,6 @@ const startBtn = document.querySelector('.start');
 const checkBtn = document.querySelector('.check');
 let container = document.querySelector('#quiz');
 let containerOfResults = document.querySelector('#results');
-const nextBtn = document.createElement('button');
 const darkBtn = document.querySelector('.dark');
 const lightBtn = document.querySelector('.light');
 const buttons = document.querySelectorAll('.btn');
@@ -164,6 +163,7 @@ const displayQuiz = () => {
           '</div>'
       );
     }
+
     container.innerHTML = output.join('');
   };
   displayQuestions(questions, container);
@@ -223,25 +223,29 @@ checkBtn.addEventListener('click', e => {
 
 startBtn.addEventListener('click', e => {
   e.preventDefault();
+  document.body.style.backgroundImage =
+    "url('https://images.ctfassets.net/feu9c6z0ptit/526V4AczqxPhIN3NqJD6vE/9b44ba1fc1bd1818afea36c084de876f/Gotland.jpg')";
+  header.style.top = '40px';
+  header.style.fontSize = '4rem';
   startBtn.style.visibility = 'hidden';
   displayQuiz(questions, container, containerOfResults, checkBtn);
-  nextBtn.innerHTML = 'Next';
-  nextBtn.className = 'nextButton';
-  document.body.appendChild(nextBtn);
 });
 
 startOverBtn.addEventListener('click', e => {
   e.preventDefault();
   startBtn.style.visibility = 'visible';
-  nextBtn.style.visibility = 'hidden';
   numOfCorrAnswers = 0;
   container.innerHTML = '';
   containerOfResults.innerHTML = '';
+  document.body.style.backgroundImage =
+    "url('http://www.stadtillstrand.se/wp-content/uploads/2021/05/visby-gotland-skymning.jpg')";
 });
 
 darkBtn.addEventListener('click', () => {
+  let answers = container.querySelectorAll('.answer');
+  let question = container.querySelectorAll('.question');
   document.body.style.backgroundImage =
-    "url('https://3.bp.blogspot.com/-BGNCai6-WVk/V8B6GEfwA5I/AAAAAAAAkFo/R5f8K5d2Yhs5jI1Q7zfze7zsxXTUsyoigCLcB/s1600/925.JPG')";
+    "url('https://specialrengoringar.se/wp-content/uploads/2021/06/sunset-382203-1920-1.jpg')";
   checkBtn.style.backgroundColor = 'white';
   checkBtn.style.color = 'black';
   startBtn.style.backgroundColor = 'white';
@@ -255,11 +259,15 @@ darkBtn.addEventListener('click', () => {
   info.style.color = 'white';
   highscoreInfo.style.color = 'white';
   header.style.color = 'white';
+  for (let i = 0; i < questions.length; i++) {
+    answers[i].style.color = 'white';
+    question[i].style.color = 'white';
+  }
 });
 
 lightBtn.addEventListener('click', () => {
   document.body.style.backgroundImage =
-    "url('http://www.stadtillstrand.se/wp-content/uploads/2021/05/visby-gotland-skymning.jpg')";
+    "url('https://images.ctfassets.net/feu9c6z0ptit/526V4AczqxPhIN3NqJD6vE/9b44ba1fc1bd1818afea36c084de876f/Gotland.jpg')";
   checkBtn.style.backgroundColor = 'rgb(59, 56, 56)';
   checkBtn.style.color = 'white';
   startBtn.style.backgroundColor = 'rgb(59, 56, 56)';
