@@ -120,10 +120,12 @@ const header = document.querySelector('h1');
 let numOfCorrAnswers = 0;
 let highscore = 0;
 
+//Function for displaying the quiz
 const displayQuiz = () => {
   const displayQuestions = () => {
     let output = [];
 
+    //Creating radio or checkbox buttons
     for (let i = 0; i < questions.length; i++) {
       let options = [];
       if (questions[i].type === 'radio') {
@@ -154,6 +156,7 @@ const displayQuiz = () => {
         }
       }
 
+      //Creating div for questions and answers and pushing into output
       output.push(
         '<div class="question">' +
           questions[i].question +
@@ -164,32 +167,38 @@ const displayQuiz = () => {
       );
     }
 
+    //Printing the answers and questions
     container.innerHTML = output.join('');
   };
   displayQuestions(questions, container);
 };
 
+//Function for displaying the results the user got
 const displayResults = () => {
   let containerOfAnswers = container.querySelectorAll('.answer');
-  let userAnswersRadio = [];
-  let userAnswersCheckbox = [];
+
   for (let i = 0; i < questions.length; i++) {
-    userAnswersRadio =
+    //All users answers with radiobuttons
+    let userAnswersRadio =
       containerOfAnswers[i].querySelector("input[type='radio']:checked") || {};
 
-    userAnswersCheckbox =
+    //All user answers with checkbox
+    let userAnswersCheckbox =
       containerOfAnswers[i].querySelectorAll(
         "input[type='checkbox']:checked"
       ) || {};
 
+    //If the answer is correct, color green
     if (userAnswersRadio.value === questions[i].correctAnswer) {
       numOfCorrAnswers++;
       containerOfAnswers[i].style.color = 'green';
     } else {
+      //else color red
       containerOfAnswers[i].style.color = 'red';
     }
 
     let corrAnswers = 0;
+    //Checking if user answer is excactly the same as correct answer for checkbox question
     for (let j = 0; j < userAnswersCheckbox.length; j++) {
       if (userAnswersCheckbox[j].value === questions[i].correctAnswer[j]) {
         corrAnswers++;
@@ -198,12 +207,14 @@ const displayResults = () => {
         containerOfAnswers[i].style.color = 'red';
       }
     }
+    //If both answers were correct you get one point
     corrAnswers === 2 ? numOfCorrAnswers++ : numOfCorrAnswers;
   }
 
   containerOfResults.innerHTML =
     'You got ' + numOfCorrAnswers + ' out of ' + questions.length + '!';
 
+  //Color outut depending on results
   containerOfResults.style.color =
     numOfCorrAnswers > questions.length * 0.75
       ? 'green'
@@ -212,31 +223,41 @@ const displayResults = () => {
       : 'black';
 };
 
+//Functions for the checkbutton
 checkBtn.addEventListener('click', e => {
   e.preventDefault();
   displayResults(questions, container, containerOfResults);
+  //Hide checkbutton so you can't click it more times
   checkBtn.style.visibility = 'hidden';
 
+  //If you got more than the highscore, print new highscore
   if (numOfCorrAnswers > highscore) {
     highscore = numOfCorrAnswers;
     highscoreInfo.textContent = highscore + '/ 10';
   }
 });
 
+//Functions for the startbutton
 startBtn.addEventListener('click', e => {
   e.preventDefault();
+  //Change background image
   document.body.style.backgroundImage =
     "url('https://images.ctfassets.net/feu9c6z0ptit/526V4AczqxPhIN3NqJD6vE/9b44ba1fc1bd1818afea36c084de876f/Gotland.jpg')";
   header.style.top = '40px';
   header.style.fontSize = '4rem';
+  //Hide Startbutton
   startBtn.style.visibility = 'hidden';
+  //Show questions and answers
   displayQuiz(questions, container, containerOfResults, checkBtn);
 });
 
+//Functions for the start over button
 startOverBtn.addEventListener('click', e => {
   e.preventDefault();
+  //Show startbutton again
   startBtn.style.visibility = 'visible';
   numOfCorrAnswers = 0;
+  //Setting everything except highscore back to normal
   container.innerHTML = '';
   containerOfResults.innerHTML = '';
   document.body.style.backgroundImage =
@@ -244,6 +265,7 @@ startOverBtn.addEventListener('click', e => {
   checkBtn.style.visibility = 'visible';
 });
 
+//Function for changing background image and text to dark mode
 darkBtn.addEventListener('click', () => {
   console.log(container);
   document.body.style.backgroundImage =
@@ -270,6 +292,7 @@ darkBtn.addEventListener('click', () => {
   document.querySelector('.label-highscore').style.color = 'white';
 });
 
+//Function for changing background image ang text to light mode
 lightBtn.addEventListener('click', () => {
   document.body.style.backgroundImage =
     "url('https://images.ctfassets.net/feu9c6z0ptit/526V4AczqxPhIN3NqJD6vE/9b44ba1fc1bd1818afea36c084de876f/Gotland.jpg')";
