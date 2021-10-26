@@ -242,8 +242,7 @@ startOverBtn.addEventListener('click', e => {
 });
 
 darkBtn.addEventListener('click', () => {
-  let answers = container.querySelectorAll('.answer');
-  let question = container.querySelectorAll('.question');
+  console.log(container);
   document.body.style.backgroundImage =
     "url('https://specialrengoringar.se/wp-content/uploads/2021/06/sunset-382203-1920-1.jpg')";
   checkBtn.style.backgroundColor = 'white';
@@ -259,10 +258,13 @@ darkBtn.addEventListener('click', () => {
   info.style.color = 'white';
   highscoreInfo.style.color = 'white';
   header.style.color = 'white';
+  let answers = container.querySelectorAll('.answer');
+  let questions = container.querySelectorAll('.question');
   for (let i = 0; i < questions.length; i++) {
     answers[i].style.color = 'white';
-    question[i].style.color = 'white';
+    questions[i].style.color = 'white';
   }
+  document.querySelector('.label-highscore').style.color = 'white';
 });
 
 lightBtn.addEventListener('click', () => {
@@ -281,4 +283,11 @@ lightBtn.addEventListener('click', () => {
   info.style.color = 'rgb(59, 56, 56)';
   highscoreInfo.style.color = 'rgb(59, 56, 56)';
   header.style.color = 'rgb(59, 56, 56)';
+  let answers = container.querySelectorAll('.answer');
+  let questions = container.querySelectorAll('.question');
+  for (let i = 0; i < questions.length; i++) {
+    answers[i].style.color = 'rgb(59, 56, 56)';
+    questions[i].style.color = 'rgb(59, 56, 56)';
+  }
+  document.querySelector('.label-highscore').style.color = 'rgb(59, 56, 56)';
 });
