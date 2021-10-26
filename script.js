@@ -184,7 +184,7 @@ const displayResults = () => {
 
     if (userAnswersRadio.value === questions[i].correctAnswer) {
       numOfCorrAnswers++;
-      containerOfAnswers[i].style.color = 'lightgreen';
+      containerOfAnswers[i].style.color = 'green';
     } else {
       containerOfAnswers[i].style.color = 'red';
     }
@@ -193,7 +193,7 @@ const displayResults = () => {
       if (userAnswersCheckbox[j].value === questions[i].correctAnswer[j]) {
         numOfCorrAnswers = numOfCorrAnswers + 0.5;
         console.log(numOfCorrAnswers);
-        containerOfAnswers[i].style.color = 'lightgreen';
+        containerOfAnswers[i].style.color = 'green';
       } else {
         containerOfAnswers[i].style.color = 'red';
       }
@@ -201,7 +201,7 @@ const displayResults = () => {
   }
 
   containerOfResults.innerHTML =
-    'You got ' + numOfCorrAnswers + ' out of ' + questions.length;
+    'You got ' + numOfCorrAnswers + ' out of ' + questions.length + '!';
 
   containerOfResults.style.color =
     numOfCorrAnswers > questions.length * 0.75
